@@ -1,10 +1,10 @@
 {
-  "name": "",
-  "version": "1.0.0",
+  "name": "neo4j-graphql-genai",
+  "version": "0.1.0",
   "description": "",
   "main": "index.js",
   "type": "module",
-  "license": "AGPL-version-3.0",
+  "license": "MIT",
   "private": false,
   "engines": {
     "node": ">= 14.0.0",
@@ -18,14 +18,14 @@
   "bugs": "",
   "keywords": [],
   "author": {
-    "name": "",
-    "email": "",
-    "url": ""
+    "name": "Adam Cowley",
+    "email": "github@adamcowley.co.uk",
+    "url": "https://github.com/adam-cowley/neo4j-graphql-genai"
   },
   "contributors": [],
   "scripts": {
-    "dev": "",
-    "test": ""
+    "start": "node index.js",
+    "dev": "nodemon index.js"
   },
   "dependencies": {
     "@apollo/server": "^4.10.0",
@@ -36,5 +36,8 @@
     "graphql": "^16.8.1",
     "langchain": "^0.1.23",
     "neo4j-driver": "^5.17.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.0"
   }
 }

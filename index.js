@@ -33,6 +33,7 @@ const typeDefs = `
   type Movie implements CanGenerate {
     title: String!
     plot: String!
+    generateReview(stars: Int!): GeneratedResponse! @customResolver
     generate(prompt: String!): GeneratedResponse! @customResolver
   }
 
@@ -45,8 +46,6 @@ const typeDefs = `
     name: String!
     born: Date
     actedInMovies: [Movie!]! @relationship(type: "ACTED_IN", properties: "ActedIn", direction: OUT)
-
-
     generate(prompt: String!): GeneratedResponse! @customResolver
   }
 `;
@@ -79,15 +78,6 @@ const generate = async (source, args) => {
   return { text: res }
 }
 
-const resolvers = {
-  Movie: {
-    generate,
-  },
-  Actor: {
-    generate,
-  },
-};
-
 // Assign resolver to many types
 const withGenerateResolver = (types = []) =>
   Object.fromEntries(
@@ -97,7 +87,9 @@ const withGenerateResolver = (types = []) =>
     ])
   )
 
-  // Define schema
+const resolvers = withGenerateResolver(['Movie', 'Actor']);
+
+// Define schema
 const neoSchema = new Neo4jGraphQL({
     typeDefs,
     driver,
